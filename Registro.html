@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/estilos.css">
+      <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+      <script src="js/jquery/jquery-3.3.1.min.js"></script>
+      <script src="js/popper/popper.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+    <title>Productos</title>
+</head>
+
+<body onload="listar()">
+    <h1>Productos</h1>
+    <hr>
+
+     <div class="container">
+    <div class="row">
+    <div class = "col-sm-6">
+    </div>
+     <div class="container_all" id="container__all">
+        <div class="cover">
+
+            <!--INICIO WAVE-->
+
+                <div class="bg_color"></div>
+                <div class="wave w1"></div>
+                <div class="wave w2"></div>
+            </div>
+             <div class="container__vector">
+                    <img src="images/undraw_Code_thinking_re_gka2.svg" alt="">
+                </div>
+    <div class = "col-sm-6">
+        <table class ="table">
+            <thead>
+                <th>Codigo Producto</th>
+                <th>Descripción del Producto</th>
+                <th>Precio Compra</th>
+                <th>Precio Venta</th>
+                <th>Existencia Producto</th>
+            </thead>
+            <tbody id="tabela-lista-corpo"></tbody>
+        </table>
+    </div>  
+
+<div>   
+
+    <div class="form">
+       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                Entrar
+            </button>
+ 
+            
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+              
+                        
+                        <div class="modal-header d-block bg-primary">
+                            <h4 class="modal-title text-center text-blue-danger">Compra del Producto</h4>
+                        </div>
+                        
+                        
+                        <div class="modal-body">
+                <form name="frmformulario" class="container">
+            <div class="form-group">
+
+             
+
+              <div class="row">
+
+                  <div class="col-sm-4">
+                    <label for="txtcodigo">codigo producto</label>
+                    <input   type="txt"  class="form-control" id="txtcod" 
+                    placeholder="Ingrese codigo" maxlength="8" required pattern="[0-9]{3,}">
+                    </input>
+
+                  </div>
+
+                  <div class="col-sm-4">
+                    <label for="txtdescripcion">descripcion producto</label>
+                    <input  type="txt"  class="form-control" id="txtdes" name="txtdes" 
+                    placeholder=" Ingrese solo Letras" required  pattern="[a-zA-Z]+">
+                    </input>
+
+                  </div>
+
+                    
+                    <div class="col-sm-4">
+                    <label for="txtprecio">PRECIO COMPRA</label>
+                    <input  type="txt"  class="form-control" id="txrpr" name="txrpr" 
+                    placeholder="Ingrese solo numeros" required  pattern="[0-9]+">
+                    </input>
+
+                  </div>
+                  
+                  
+                  
+                  <div class="col-sm-4">
+                    <label for="txtventa">PRECIO VENTA</label>
+                    <input  type="txt"  class="form-control" id="txtveta" name="txtveta" 
+                    placeholder=" Ingrese solo numeros" required  pattern="[0-9]+">
+                    </input>
+
+                  </div>
+                  
+                  <div class="col-sm-4">
+                    <label for="txtventa"> EXISTENCIA PRODUCTO</label>
+                    <input  type="txt"  class="form-control" id="txtstocks" name="txtstocks"
+                    placeholder="Solo Ingrese numero" required  pattern="[0-9]+">
+                    </input>
+
+                  </div>
+                  
+                        
+                        <div class="modal-footer">
+                            <button type="button" id='btnGuardar'>ENVIAR COMPRA PRODUCTO</button> 
+    </div>
+
+   
+
+    <script>
+        let contatos = [{ 
+                            codigo1 : "Jesus Rafael Arevalo",
+                            descripcion : "Hola mundo",
+                             precioc : "20",
+                             preciov: "100",
+                             existenciap: "Hola mundo2"
+                        }]
+
+
+        let btnGuardar = document.querySelector("#btnGuardar");
+        btnGuardar.addEventListener("click", cadastrar);
+
+
+
+        let codigo1 = document.querySelector("#txtcod");
+        let descripcion = document.querySelector("#txtdes");
+        let precioc = document.querySelector("#txrpr");
+        let preciov = document.querySelector("#txtveta");
+        let existenciap = document.querySelector("#txtstocks");
+
+
+
+        function listar(){
+            let corpoTabela = document.querySelector("#tabela-lista-corpo"); 
+            corpoTabela.innerHTML = "";
+
+            let linha, colunanombre, colunaedad;
+
+            contatos.forEach(item => {
+                linha = document.createElement("tr");
+
+                colunacodigo1 = document.createElement("td");
+                colunacodigo1.innerText = item.codigo1; 
+                linha.appendChild(colunacodigo1); 
+
+                colunadescripcion = document.createElement("td");
+                colunadescripcion.innerText = item.descripcion;
+                linha.appendChild(colunadescripcion); 
+
+                colunaprecioc = document.createElement("td");
+                colunaprecioc.innerText = item.precioc;
+                linha.appendChild(colunaprecioc); 
+
+                colunapreciov = document.createElement("td");
+                colunapreciov.innerText = item.preciov;
+                linha.appendChild(colunapreciov); 
+
+                colunaexistenciap = document.createElement("td");
+                colunaexistenciap.innerText = item.existenciap;
+                linha.appendChild(colunaexistenciap); 
+
+                corpoTabela.appendChild(linha);
+            });
+
+
+        }                
+    
+        function cadastrar(event){
+            event.preventDefault();
+
+            try {
+                let contato = {
+                    codigo1 : codigo1.value,
+                    descripcion: descripcion.value,
+                    precioc : precioc.value,
+                    preciov : preciov.value,
+                    existenciap: existenciap.value
+                }
+
+
+
+                contatos.push(contato);
+
+                alert("Uusario Registrado");
+
+                listar();               
+            } catch (error) {
+                alert("Error");
+            }
+        }
+
+        function remover(event){
+            event.preventDefault();
+            
+            let index = contatos.findIndex(item => item.edad === edad.value);
+            console.log(index);
+
+            if(index > -1){
+                contatos.splice(index, 1)
+                alert("Usuario Eliminado");
+
+                listar();
+            } else {
+                alert("Contacto no encontrado");
+            }
+        }
+
+    </script>
+
+</body>
+</html>
